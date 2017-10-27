@@ -12,7 +12,7 @@ class Post extends Component {
             {post.title}
           </Card.Header>
           <Card.Description>
-            <List celled relaxed>
+            <List relaxed>
               <List.Item>
                 <List.Icon name='info' />
                 <List.Content>{post.id}</List.Content>

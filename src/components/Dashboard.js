@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
-import { Container, Header, Card } from 'semantic-ui-react';
-import Post from './Post';
-import posts from './posts';
+import { Container, Header, Loader } from 'semantic-ui-react';
+import PostGrid from './PostGrid';
+import api from '../utils/api';
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { posts: null };
+  }
+
+  componentDidMount() {
+    api.fetchFirstPosts()
+      .then((posts) => {
+        this.setState({ posts: posts });
+      });
+  }
+
   render() {
-    const postsCards = posts.map((post) =>
-      <Post key={post.id} post={post} />
-    );
+    const posts = this.state.posts;
     return (
       <Container>
-        <Header as='h1' block color='blue'>
+        <Header as='h1' color='blue'>
           Posts
         </Header>
-        <Card.Group itemsPerRow={4} stackable>
-          {postsCards}
-        </Card.Group>
+        {posts
+          ? <PostGrid posts={posts} />
+          : <Loader active inline='centered' size='large' />}
       </Container>
     );
   }
