@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Loader } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Container, Header, Loader, Button } from 'semantic-ui-react';
 import PostGrid from './PostGrid';
 import api from '../utils/api';
 
@@ -20,8 +21,11 @@ class Dashboard extends Component {
     const posts = this.state.posts;
     return (
       <Container>
-        <Header as='h1' color='blue'>
+        <Header as='h1' color='blue' dividing>
           Posts
+          <Button floated='right' as={Link} to='/new' primary>
+            Novo Post
+          </Button>
         </Header>
         {posts
           ? <PostGrid posts={posts} />
