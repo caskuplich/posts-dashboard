@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, Button } from 'semantic-ui-react';
 
 class HeaderMenu extends Component {
@@ -7,7 +8,7 @@ class HeaderMenu extends Component {
       <Menu size='huge' inverted borderless>
         <Menu.Item header>Posts Dashboard</Menu.Item>
         <Menu.Item position='right'>
-          <Button primary>Novo post</Button>
+          <Button primary as={Link} to='/new'>Novo post</Button>
         </Menu.Item>
       </Menu>
     );
