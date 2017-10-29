@@ -24,6 +24,7 @@ class PostForm extends Component {
       showErrors: false,
       validationErrors: {},
       createdPost: null,
+      submitting: false,
       submissionError: false
     };
 
@@ -54,12 +55,16 @@ class PostForm extends Component {
     event.preventDefault();
     this.setState({ showErrors: true });
     if (this.isValid()) {
+      this.setState({ submitting: true });
       api.createNewPost(this.state)
         .then((newPost) => {
           this.setState({ createdPost: newPost });
         })
         .catch((error) => {
           this.setState({ submissionError: true });
+        })
+        .then(() => {
+          this.setState({ submitting: false });
         });
     }
   }
@@ -79,7 +84,7 @@ class PostForm extends Component {
                 Erro na criação do post. Por favor, tente novamente mais tarde.
               </Message>
               <Header as='h1' color='blue' dividing>Novo post</Header>
-              <Form onSubmit={this.handleSubmit}>
+              <Form onSubmit={this.handleSubmit} loading={this.state.submitting}>
                 <TextInput
                   label='ID do usuário'
                   placeholder='ID do usuário'
