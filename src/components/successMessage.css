@@ -1,0 +1,19 @@
+.dl-horizontal {
+  padding: 0.5em;
+}
+.dl-horizontal > dt {
+  float: left;
+  clear: left;
+  width: 100px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.dl-horizontal > dt::after {
+  content: ":";
+}
+
+.dl-horizontal > dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
+}
