@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Form, Input, TextArea, Message } from 'semantic-ui-react';
+import { Container, Header, Form, Message } from 'semantic-ui-react';
 import FormField from './FormField';
 import SuccessMessage from './SuccessMessage';
 import api from '../utils/api';
@@ -112,7 +112,6 @@ class PostForm extends Component {
               <Header as='h1' color='blue' dividing>Novo post</Header>
               <Form onSubmit={this.handleSubmit} loading={this.state.submitting}>
                 <FormField
-                  control={Input}
                   label='ID do usuário'
                   placeholder='ID do usuário'
                   name='userId'
@@ -122,7 +121,6 @@ class PostForm extends Component {
                   errorMessage={this.errorFor('userId')}
                 />
                 <FormField
-                  control={Input}
                   label='Título'
                   placeholder='Título'
                   name='title'
@@ -132,7 +130,7 @@ class PostForm extends Component {
                   errorMessage={this.errorFor('title')}
                 />
                 <FormField
-                  control={TextArea}
+                  textArea
                   label='Conteúdo'
                   placeholder='Escreva aqui o conteúdo do post'
                   name='body'

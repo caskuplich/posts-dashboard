@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Message } from 'semantic-ui-react';
+import { Form, Message, Input, TextArea } from 'semantic-ui-react';
 import './FormField.css';
 import PropTypes from 'prop-types';
 
@@ -16,10 +16,11 @@ class FormField extends Component {
   }
 
   render() {
+    const control = this.props.textArea ? TextArea : Input;
     return (
       <div className='form-field'>
         <Form.Field
-          control={this.props.control}
+          control={control}
           label={this.props.label}
           placeholder={this.props.placeholder}
           name={this.props.name}
@@ -38,11 +39,17 @@ class FormField extends Component {
   }
 }
 
+FormField.defaultProps = {
+  textArea: false,
+  error: false,
+  errorMessage: ''
+};
+
 FormField.propTypes = {
   /**
-   * A Semantic UI React form control component (i.e. Input, TextArea, etc.).
+   * Render the field as a <textarea>.
    */
-  control: PropTypes.func.isRequired,
+  textArea: PropTypes.bool,
   /**
    * Field label.
    */
