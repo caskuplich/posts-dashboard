@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Message } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react';
 import './formField.css';
 
 class FormField extends Component {

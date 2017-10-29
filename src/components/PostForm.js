@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Form } from 'semantic-ui-react';
+import { Container, Header, Form, Message } from 'semantic-ui-react';
 import TextInput from './TextInput';
 import TextArea from './TextArea';
 import SuccessMessage from './SuccessMessage';
@@ -23,7 +23,8 @@ class PostForm extends Component {
       body: '',
       showErrors: false,
       validationErrors: {},
-      createdPost: null
+      createdPost: null,
+      submissionError: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -56,6 +57,9 @@ class PostForm extends Component {
       api.createNewPost(this.state)
         .then((newPost) => {
           this.setState({ createdPost: newPost });
+        })
+        .catch((error) => {
+          this.setState({ submissionError: true });
         });
     }
   }
@@ -71,6 +75,9 @@ class PostForm extends Component {
         { this.state.createdPost
           ? <SuccessMessage post={this.state.createdPost} />
           : <div>
+              <Message hidden={!this.state.submissionError} error>
+                Erro na criação do post. Por favor, tente novamente mais tarde.
+              </Message>
               <Header as='h1' color='blue' dividing>Novo post</Header>
               <Form onSubmit={this.handleSubmit}>
                 <TextInput

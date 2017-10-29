@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Loader, Button } from 'semantic-ui-react';
+import { Container, Header, Loader, Button, Message } from 'semantic-ui-react';
 import PostGrid from './PostGrid';
 import api from '../utils/api';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: null };
+    this.state = {
+      posts: null,
+      requestError: false
+    };
   }
 
   componentDidMount() {
     api.fetchFirstPosts()
       .then((posts) => {
         this.setState({ posts: posts });
+      })
+      .catch(() => {
+        this.setState({ requestError: true });
       });
   }
 
   render() {
     const posts = this.state.posts;
+    const error = this.state.requestError;
     return (
       <Container>
         <Header as='h1' color='blue' dividing>
@@ -29,7 +36,11 @@ class Dashboard extends Component {
         </Header>
         {posts
           ? <PostGrid posts={posts} />
-          : <Loader active inline='centered' size='large' />}
+          : (error
+            ? <Message error>
+                Não foi possível obter os posts. Por favor, tente novamente mais tarde.
+              </Message>
+            : <Loader active inline='centered' size='large' />)}
       </Container>
     );
   }

@@ -13,9 +13,6 @@ export default {
     return axios.post(POST_API_URL, post)
       .then(function(response) {
         return response.data;
-      })
-      .catch(function(error) {
-        return error;
       });
   }
 };
