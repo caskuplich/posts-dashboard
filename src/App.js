@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import PostForm from './components/PostForm';
+import NotFound from './components/NotFound';
 import './App.css';
 
 /**
@@ -16,8 +17,11 @@ class App extends Component {
           <Menu size='huge' inverted borderless>
             <Menu.Item header as={Link} to='/'>Posts Dashboard</Menu.Item>
           </Menu>
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/new" component={PostForm} />
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/new" component={PostForm} />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     );
