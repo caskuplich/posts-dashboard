@@ -5,6 +5,9 @@ import Dashboard from './components/Dashboard';
 import PostForm from './components/PostForm';
 import './App.css';
 
+/**
+ * App is a container component that wraps all the app components.
+ */
 class App extends Component {
   render() {
     return (

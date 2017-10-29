@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Card } from 'semantic-ui-react';
 import Post from './Post';
 
+/**
+ * PostGrid is a stackable horizontal grid of posts.
+ */
 class PostGrid extends Component {
   render() {
     const posts = this.props.posts;

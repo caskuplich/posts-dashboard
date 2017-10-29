@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { Message, Header, Segment, Button } from 'semantic-ui-react';
 import './SuccessMessage.css';
 
+/**
+ * SuccessMessage displays the new post created and a success message.
+ */
 class SuccessMessage extends Component {
   render() {
     const post = this.props.post;

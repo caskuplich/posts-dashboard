@@ -6,12 +6,18 @@ import api from '../utils/api';
 import { validate, ruleRunner } from '../utils/validation';
 import { required, isNumber } from '../utils/validationRules';
 
+/**
+ * Validation rules for each form field.
+ */
 const fieldValidations = [
   ruleRunner('userId', 'ID do usuário', required, isNumber),
   ruleRunner('title', 'Título', required),
   ruleRunner('body', 'Conteúdo', required),
 ];
 
+/**
+ * PostForm is a form to create a new post.
+ */
 class PostForm extends Component {
   constructor(props) {
     super(props);
@@ -36,38 +42,59 @@ class PostForm extends Component {
     });
   }
 
+  /**
+   * Get the error messages for the field passed in.
+   */
   errorFor(field) {
     return this.state.validationErrors[field] || '';
   }
 
+  /**
+   * Handles field value change for each form field.
+   */
   handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
 
+    // copy the current state and merge the value of the changed field
     let newState = { ...this.state, [name]: value };
+    // run validate to save the validation errors on the new state
     newState.validationErrors = validate(newState, fieldValidations);
 
     this.setState(newState);
   }
 
+  /**
+   * Handles the form submit by calling the API if the form is valid.
+   */
   handleSubmit(event) {
     event.preventDefault();
+
+    // show the validation errors after the form submit
     this.setState({ showErrors: true });
+
     if (this.isValid()) {
+      // start the loading spinner
       this.setState({ submitting: true });
       api.createNewPost(this.state)
         .then((newPost) => {
+          // POST to API returns the new post created
           this.setState({ createdPost: newPost });
         })
         .catch((error) => {
+          // show an error message if the submission fails
           this.setState({ submissionError: true });
         })
         .then(() => {
+          // cancel de loading spinner
           this.setState({ submitting: false });
         });
     }
   }
 
+  /**
+   * Helper method to check if the form is valid.
+   */
   isValid() {
     const errors = this.state.validationErrors;
     return (Object.keys(errors).length === 0 && errors.constructor === Object);

@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { Form, Message } from 'semantic-ui-react';
 import './FormField.css';
 
+/**
+ * FormField is a field containing a label, an input and a validation error
+ * message.
+ */
 class FormField extends Component {
+  /**
+   * Helper method to check if the error should be displayed.
+   */
   shouldDisplayError() {
     return this.props.error && this.props.errorMessage !== '';
   }

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Card, List } from 'semantic-ui-react';
 import './Post.css';
 
+/**
+ * Post is a card to display post information.
+ */
 class Post extends Component {
   render() {
     const post = this.props.post;

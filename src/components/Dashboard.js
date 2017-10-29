@@ -4,6 +4,9 @@ import { Container, Header, Loader, Button, Message } from 'semantic-ui-react';
 import PostGrid from './PostGrid';
 import api from '../utils/api';
 
+/**
+ * Dashboard presents the first 4 posts in a horizontal grid.
+ */
 class Dashboard extends Component {
   constructor(props) {
     super(props);
