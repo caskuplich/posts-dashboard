@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Message, Header, Segment, Button } from 'semantic-ui-react';
-import './successMessage.css';
+import './SuccessMessage.css';
 
 class SuccessMessage extends Component {
   render() {

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Header, Form, Message } from 'semantic-ui-react';
-import TextInput from './TextInput';
-import TextArea from './TextArea';
+import { Container, Header, Form, Input, TextArea, Message } from 'semantic-ui-react';
+import FormField from './FormField';
 import SuccessMessage from './SuccessMessage';
 import api from '../utils/api';
 import { validate, ruleRunner } from '../utils/validation';
 import { required, isNumber } from '../utils/validationRules';
-import './postForm.css';
 
 const fieldValidations = [
   ruleRunner('userId', 'ID do usuário', required, isNumber),
@@ -42,10 +40,11 @@ class PostForm extends Component {
     return this.state.validationErrors[field] || '';
   }
 
-  handleChange(field, event) {
+  handleChange(event) {
+    const name = event.target.name;
     const value = event.target.value;
 
-    let newState = { ...this.state, [field]: value };
+    let newState = { ...this.state, [name]: value };
     newState.validationErrors = validate(newState, fieldValidations);
 
     this.setState(newState);
@@ -76,7 +75,7 @@ class PostForm extends Component {
 
   render() {
     return (
-      <Container text className='postForm'>
+      <Container text>
         { this.state.createdPost
           ? <SuccessMessage post={this.state.createdPost} />
           : <div>
@@ -85,31 +84,34 @@ class PostForm extends Component {
               </Message>
               <Header as='h1' color='blue' dividing>Novo post</Header>
               <Form onSubmit={this.handleSubmit} loading={this.state.submitting}>
-                <TextInput
+                <FormField
+                  control={Input}
                   label='ID do usuário'
                   placeholder='ID do usuário'
                   name='userId'
                   value={this.state.userId}
-                  onInputChange={(event) => this.handleChange('userId', event)}
-                  showError={this.state.showErrors}
+                  onInputChange={this.handleChange}
+                  error={this.state.showErrors}
                   errorMessage={this.errorFor('userId')}
                 />
-                <TextInput
+                <FormField
+                  control={Input}
                   label='Título'
                   placeholder='Título'
                   name='title'
                   value={this.state.title}
-                  onInputChange={(event) => this.handleChange('title', event)}
-                  showError={this.state.showErrors}
+                  onInputChange={this.handleChange}
+                  error={this.state.showErrors}
                   errorMessage={this.errorFor('title')}
                 />
-                <TextArea
+                <FormField
+                  control={TextArea}
                   label='Conteúdo'
                   placeholder='Escreva aqui o conteúdo do post'
                   name='body'
                   value={this.state.body}
-                  onInputChange={(event) => this.handleChange('body', event)}
-                  showError={this.state.showErrors}
+                  onInputChange={this.handleChange}
+                  error={this.state.showErrors}
                   errorMessage={this.errorFor('body')}
                 />
                 <Form.Button primary>Enviar</Form.Button>

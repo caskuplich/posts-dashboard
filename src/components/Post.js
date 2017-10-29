@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, List } from 'semantic-ui-react';
-import './post.css';
+import './Post.css';
 
 class Post extends Component {
   render() {
