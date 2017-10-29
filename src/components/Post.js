@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, List } from 'semantic-ui-react';
 import './Post.css';
+import PropTypes from 'prop-types';
 
 /**
  * Post is a card to display post information.
@@ -31,5 +32,17 @@ class Post extends Component {
     );
   }
 }
+
+Post.propTypes = {
+  /**
+   * post is required and must have an id.
+   */
+  post: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    userId: PropTypes.number,
+    title: PropTypes.string,
+    body: PropTypes.string
+  }).isRequired
+};
 
 export default Post;

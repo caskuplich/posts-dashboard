@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Message, Header, Segment, Button } from 'semantic-ui-react';
 import './SuccessMessage.css';
+import PropTypes from 'prop-types';
 
 /**
  * SuccessMessage displays the new post created and a success message.
@@ -32,5 +33,17 @@ class SuccessMessage extends Component {
     );
   }
 }
+
+SuccessMessage.propTypes = {
+  /**
+   * post is required and must have an id.
+   */
+  post: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    userId: PropTypes.number,
+    title: PropTypes.string,
+    body: PropTypes.string
+  }).isRequired
+};
 
 export default SuccessMessage;

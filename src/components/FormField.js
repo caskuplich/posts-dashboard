@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Message } from 'semantic-ui-react';
 import './FormField.css';
+import PropTypes from 'prop-types';
 
 /**
  * FormField is a field containing a label, an input and a validation error
@@ -36,5 +37,40 @@ class FormField extends Component {
     );
   }
 }
+
+FormField.propTypes = {
+  /**
+   * A Semantic UI React form control component (i.e. Input, TextArea, etc.).
+   */
+  control: PropTypes.func.isRequired,
+  /**
+   * Field label.
+   */
+  label: PropTypes.string,
+  /**
+   * Field placeholder.
+   */
+  placeholder: PropTypes.string,
+  /**
+   * Field name.
+   */
+  name: PropTypes.string,
+  /**
+   * Field value.
+   */
+  value: PropTypes.string,
+  /**
+   * onChange event handler.
+   */
+  onInputChange: PropTypes.func,
+  /**
+   * Displays field error state.
+   */
+  error: PropTypes.bool,
+  /**
+   * Field error message.
+   */
+  errorMessage: PropTypes.string
+};
 
 export default FormField;
